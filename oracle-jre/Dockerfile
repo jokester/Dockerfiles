@@ -1,6 +1,8 @@
 FROM alpine:3.3
 MAINTAINER Wang <momocraft@gmail.com>
 
+## **NOT** working due to https://github.com/gliderlabs/docker-alpine/issues/11
+
 ENV DOWNLOAD_URL http://download.oracle.com/otn-pub/java/jdk/8u73-b02/server-jre-8u73-linux-x64.tar.gz
 ENV ORACLE_COOKIE "Cookie: oraclelicense=accept-securebackup-cookie"
 ENV TGZ server-jre-8u73-linux-x64.tar.gz
