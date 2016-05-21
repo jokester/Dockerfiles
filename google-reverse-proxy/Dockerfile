@@ -5,7 +5,7 @@
 # [ngx_http_google_filter_module](https://github.com/cuber/ngx_http_google_filter_module)
 # [nginx-google_filter@aur](https://aur.archlinux.org/cgit/aur.git/tree/PKGBUILD?h=nginx-google_filter)
 
-FROM alpine
+FROM alpine:3.3
 MAINTAINER Wang <momocraft@gmail.com>
 
 ENV BUILD_DEP build-base wget tar openssl-dev pcre-dev zlib-dev
@@ -26,9 +26,12 @@ RUN \
     && tar xf $PKGNAME_MOD2.tgz                                                                                                           \
     && cd $PKGNAME_NGINX && ./configure --add-module=../$PKGNAME_MOD1 --add-module=../$PKGNAME_MOD2                                       \
     && make -j install                                                                                                                    \
-    && echo '' >> /etc/
     && cd /                                                                                                                               \
     && rm -rf /usr/src                                                                                                                    \
     && apk del $BUILD_DEP && rm -rf /var/cache/apk/*
+
+ADD nginx.conf /usr/local/nginx/conf/nginx.conf
+
+EXPOSE 20080
 
 CMD ["/usr/local/nginx/sbin/nginx", "-g", "daemon off;"]
