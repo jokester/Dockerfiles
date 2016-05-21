@@ -2,26 +2,28 @@
 
 `nginx` image to mirror google / google scholar. Powered by [ngx_http_google_filter_module](https://github.com/cuber/ngx_http_google_filter_module) / alpine linux.
 
+[中文版](Readme-zh.md)
+
 --------------
 
 ## Default configuration
 
-`docker run -d --publish 20080:20080 --restart=always jokester/google-reverse-proxy` starts a server with default configuration:
+`docker run -d --publish 54321:20080 --restart=always jokester/google-reverse-proxy` starts a server with default configuration:
 
-- Listen on `0.0.0.0:20080` (http)
+- Listen on `0.0.0.0:54321` (http)
 - Language: en
 - With google scholar (at `/scholar/`)
 
 ## Custom configuration
 
-Additional configuration including
+One can inject more configuration by creating `/nginx-conf.d/xxx.conf` in container:
 
 - https
-- set locale
+- set language
 - http basic auth
 - (whatever can be done within the `http` block)
 
-can be done by mounting a volume at `/nginx-conf.d/` and create `*.conf` in it (see [nginx.conf](https://github.com/jokester/Dockerfiles/blob/master/google-reverse-proxy/nginx.conf)).
+`/nginx-conf.d/*.conf` get included into the `http` block of `nginx.conf` (see [nginx.conf](https://github.com/jokester/Dockerfiles/blob/master/google-reverse-proxy/nginx.conf)).
 
 ## Source
 
