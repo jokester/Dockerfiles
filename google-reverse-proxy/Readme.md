@@ -1,6 +1,8 @@
 ## google-reverse-proxy
 
-`nginx` image to mirror google / google scholar. Powered by [ngx_http_google_filter_module](https://github.com/cuber/ngx_http_google_filter_module)
+`nginx` image to mirror google / google scholar. Powered by [ngx_http_google_filter_module](https://github.com/cuber/ngx_http_google_filter_module) / alpine linux.
+
+--------------
 
 ## Default configuration
 
@@ -19,8 +21,8 @@ Additional configuration including
 - http basic auth
 - (whatever can be done within the `http` block)
 
-can be done by mounting a volume at `/nginx-conf.d/` and create `*.conf` in it (see [nginx.conf](https://github.com/jokester/Dockerfiles/google-reverse-proxy/nginx.conf)).
+can be done by mounting a volume at `/nginx-conf.d/` and create `*.conf` in it (see [nginx.conf](https://github.com/jokester/Dockerfiles/blob/master/google-reverse-proxy/nginx.conf)).
 
 ## Source
 
-[Dockerfile](https://github.com/jokester/Dockerfiles/google-reverse-proxy)
+[Dockerfile](https://github.com/jokester/Dockerfiles/tree/master/google-reverse-proxy)
