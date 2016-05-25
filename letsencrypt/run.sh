@@ -19,7 +19,7 @@ seed-data-volume () {
   fi
 
   # nobody than root should touch them
-  chmod 0600 /data/*
+  chmod 0600 /data/{config.sh,domains.txt,env}
 }
 
 run-letsencrypt () {
