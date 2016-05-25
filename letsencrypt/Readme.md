@@ -1,27 +1,28 @@
-<!-- vim: ft=markdown
--->
-# Renewal
+# A one-shot container to issue/renew letsencrypt certificates with DNS challenge
 
-## Usage
+## Powered by [lexicon]() / [letsencrypt.sh]()
 
-
-## `domains.txt`
-
-## Auth 
-
-DNS Providers and auth credentials are set by env variable (`docker run -e`).
-
-Necessary variables differ for different DNS providers. See [lexicon](https://github.com/AnalogJ/lexicon#environmental-variables) for the variables you need.
-
-For example, a digital ocean host can use:
+## Run
 
 ```
-docker run -e "PROVIDER=digitalocean" -e "LEXICON_DIGITALOCEAN_TOKEN=4b6038f40b513baeb8df05caeb5366ffdb7535205175d1f12623110bf196650f"
+docker run -v /var/letsencrypt:/data --rm jokester/letsencrypt
 ```
 
-## File exchange
+If it did not succeed, check `/var/letsencrypt/Readme.md` ([github](#aaa)) and fill in the necessary information.
 
+## Credentials for DNS challenge
 
------
+You will need auth credentials (aka API keys / tokens) from your DNS providers.
 
-## API Token
+(In case you are curious, these credentials are used to create a TXT record in the domain, and convince letsencrypt that you really own it.)
+
+The credentials can be set with environment variables. You can specify with `docker run -e`, or with `/var/letsencrypt/env` in container.
+
+For example, a digital ocean user can use:
+
+```
+docker run -e "PROVIDER=digitalocean" -e "LEXICON_DIGITALOCEAN_TOKEN=aaaabbbb12344321"
+```
+
+See [lexicon](https://github.com/AnalogJ/lexicon#environmental-variables) for the required variables for your provider.
+
