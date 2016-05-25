@@ -1,5 +1,4 @@
-#
-# A container to issue/renew letsencrypt certificates with DNS challenge
+# A one-shot container to issue/renew letsencrypt certificates with DNS challenge
 # docker run -v /var/letsencrypt:/data --rm jokester/letsencrypt
 
 FROM alpine:3.3
