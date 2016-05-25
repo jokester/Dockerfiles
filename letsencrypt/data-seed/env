@@ -1,0 +1,8 @@
+# vim: ft=sh
+# this file will be sourced before running letsencrypt.sh
+
+### configure for lexicon
+# example of digitalocean
+# export PROVIDER=digitalocean
+# export LEXICON_DIGITALOCEAN_TOKEN=aaaabbbb12344321
+
