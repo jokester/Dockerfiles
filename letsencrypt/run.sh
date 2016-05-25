@@ -4,7 +4,7 @@ set -e
 
 # seed /data with configuration template
 seed-data-volume () {
-  mkdir -pv /data/{certs,logs}
+  mkdir -pv /data/logs
 
   for fn in env domains.txt ; do
     [[ -e /data/$fn ]] || cp -v /data-seed/$fn /data/
