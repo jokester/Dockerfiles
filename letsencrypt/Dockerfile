@@ -15,11 +15,9 @@ RUN                                                                             
     && curl -SsL https://github.com/lukas2511/letsencrypt.sh/archive/v0.2.0.tar.gz | tar xzv -C /                                 \
     && curl -SsL https://raw.githubusercontent.com/AnalogJ/lexicon/v1.1.4/examples/letsencrypt.default.sh -o /$LE_PATH/lexicon-hook.sh \
     && chmod +x $LE_PATH/lexicon-hook.sh                                                                                          \
-    && pip install git+https://github.com/jokester/lexicon.git@17de1941e13011fee3ab4cd574289ca413976342                           \
+    && pip install 'dns-lexicon==1.1.5'                                                                                           \
     && ln -sv /data/config.sh $LE_PATH/                                                                                           \
     && apk del $BUILD_DEP && rm -rf /var/cache/apk/*
-
-# TODO install lexicon from pip repo after they accepts my PR
 
 COPY run.sh /
 
