@@ -3,7 +3,7 @@
 # MUST be runned with permission and pki files
 # docker run -it -v /var/openvpn-server:/openvpn-server -p :1194:1194 --cap-add=NET_ADMIN --name=openvpn jokester/openvpn
 
-FROM alpine
+FROM alpine:3.4
 MAINTAINER Wang <momocraft@gmail.com>
 
 RUN apk add --update openvpn && rm -rf /var/cache/apk/*
