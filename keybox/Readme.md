@@ -8,5 +8,4 @@ Build with [Dockerfile](https://github.com/jokester/Dockerfiles/blob/master/keyb
 
 Tomcat runs on port 8443
 
-Places you may want to mount a volume with: `/artifactory-data/`. Because `{data,logs,backup,etc}` get symlinked to `/artifactory-oss/`
-(see https://www.jfrog.com/confluence/display/RTF/Running+with+Docker#RunningwithDocker-RunningArtifactoryOSSorPro )
+Places you may want to mount a volume with: `/keydb` which contains
