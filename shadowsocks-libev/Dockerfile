@@ -15,14 +15,13 @@ RUN set -ex \
     && curl -sSL $SS_URL | tar xz \
     && cd $SS_DIR \
         && ./configure \
-        && make install \
+        && make install -j2 \
         && cd .. \
         && rm -rf $SS_DIR \
     && apk del --purge $SS_DEP \
     && rm -rf /var/cache/apk/*
 
 ADD entry.sh /
-ADD run.sh /
 
 ENV SERVER_ADDR 0.0.0.0
 ENV SERVER_PORT 54321
@@ -33,4 +32,4 @@ ENV DNS_ADDR    8.8.8.8
 
 EXPOSE $SERVER_PORT
 
-CMD sh /entry.sh
+CMD ["sh", "/entry.sh"]
