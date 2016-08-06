@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Shadowsocks服务生成器</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Primer/3.0.1/css/primer.css">
+    <style>
+        #title {
+            text-align: center;
+            padding: 1em;
+        }
+        
+        #error-message {
+            color: red;
+        }
+    </style>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="center" id="title">Shadowsocks服务生成器</h1>
+        <hr/>
+
+        <div>
+            <h2>说明</h2>
+            <p>这个网页可以为你生成启动shadowsocks服务器所需的命令. shadowsocks服务器可以用来科学上网. 你还需要有一台位于公网的, 装有docker的linux服务器</p>
+        </div>
+
+        <hr/>
+
+        <div>
+            <h2>选项</h2>
+            <form id="ss-options">
+                <dl class="form-group">
+                    <dt><label>端口</label></dt>
+                    <dd><input name="port" class="form-control" type="text" value="" placeholder="1025~65535之间的整数"></dd>
+                </dl>
+                <dl class="form-group">
+                    <dt><label>密码</label></dt>
+                    <dd><input name="pass" class="form-control" type="text" value="" placeholder="连接时需要的密码"></dd>
+                </dl>
+                <dl class="form-group">
+                    <dt><label>加密方式</label></dt>
+                    <dd>
+                        <select name="encrypt-method">
+                            <option value="table">table</option>
+                            <option value="rc4">rc4</option>
+                            <option value="rc4-md5">rc4-md5</option>
+                            <option value="aes-128-cfb">aes-128-cfb</option>
+                            <option value="aes-192-cfb">aes-192-cfb</option>
+                            <option value="aes-256-cfb" selected="selected">aes-256-cfb</option>
+                            <option value="bf-cfb">bf-cfb</option>
+                            <option value="camellia-128-cfb">camellia-128-cfb</option>
+                            <option value="camellia-192-cfb">camellia-192-cfb</option>
+                            <option value="camellia-256-cfb">camellia-256-cfb</option>
+                            <option value="cast5-cfb">cast5-cfb</option>
+                            <option value="des-cfb">des-cfb</option>
+                            <option value="idea-cfb">idea-cfb</option>
+                            <option value="rc2-cfb">rc2-cfb</option>
+                            <option value="seed-cfb">seed-cfb</option>
+                            <option value="salsa20">salsa20</option>
+                            <option value="chacha20">chacha20</option>
+                            <option value="chacha20-ietf">chacha20-ietf</option>
+                        </select>
+                    </dd>
+                </dl>
+                <dl class="form-group">
+                    <dt><label>不允许客户端连接到服务器局域网</label></dt>
+                    <dd>
+                        <input name='prohibit-lan' type="checkbox" checked>
+                    </dd>
+                </dl>
+            </form>
+
+            <hr/>
+            <h3 id='error-message'></h3>
+
+            <div id="output" style="display: none;">
+                <h2>生成结果</h2>
+                <p><label>启动 (在Linux VPS的 shell中执行)</label></p>
+                <code><pre id="ss-start-command">改变上面的选项</pre></code>
+                <p><label>停止 (在Linux VPS的 shell中执行)</label></p>
+                <code><pre id="ss-stop-command">改变上面的选项</pre></code>
+
+            </div>
+
+            <hr/>
+
+            <div>
+                <h2>相关链接</h2>
+                <ul>
+                    <li><a href="https://fuckgfw-jokester.rhcloud.com/" target="_blank">一个google镜像站 (https)</a></li>
+                    <li><a href="https://fuckgfw-jokester.rhcloud.com/#q=%E6%80%8E%E6%A0%B7%E5%AE%89%E8%A3%85docker" target="_blank">怎样安装docker</a></li>
+                </ul>
+            </div>
+
+            <hr/>
+
+            <div>
+                <h4>(广告) 如果你需要linux服务器</h4>
+                <p>下面的digitalocean / vultr是两家速度和价格不错的服务器商, 都有每月5刀的, 流量不少的服务器. </p>
+                <p>如果你用下面的推广链接注册, 这些服务器商会给你和我一些回扣 (大约10刀~20刀不等). </p>
+                <ul>
+                    <li> digitalocean:
+                        <a href="https://www.digitalocean.com/community/questions/do-you-have-a-speed-test" target="_blank">测速连接</a>                        /
+                        <a href="https://fuckgfw-jokester.rhcloud.com/#q=%E6%B3%A8%E5%86%8C+digitalocean" target="_blank">注册教程</a>                        /
+                        <a href="https://m.do.co/c/7032a238e201" target="_blank">我的推广链接</a>
+                    </li>
+                    <li> vultr:
+                        <a href="https://www.vultr.com/faq/#downloadspeedtests" target="_blank">测速连接</a> /
+                        <a href="https://fuckgfw-jokester.rhcloud.com/#q=%E6%B3%A8%E5%86%8C+vultr" target="_blank">注册教程</a>                        /
+                        <a href="http://www.vultr.com/?ref=6917578-3B" target="_blank">我的推广链接</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <script>
+var generate = function() {
+    var startParts = ['docker run -d --restart=always'];
+    var container_name;
+    try {
+        var pairs = $('#ss-options').serializeArray();
+        pairs.forEach(function(pair) {
+            var name = pair.name;
+            var value = pair.value;
+            if (name === 'port') {
+                var port = parseInt(value);
+                if (!value.match(/^\d+$/) || !(1024 < port && port < 65536)) {
+                    throw "错误: 端口需要是1025~65535之间的整数";
+                }
+                container_name="ss-libev-port" + port;
+                startParts.push('--name=' + container_name, '-p', port + ':54321');
+            } else if (name === 'encrypt-method') {
+                startParts.push('-e', 'METHOD=' + value);
+            } else if (name === 'pass') {
+                if (!value) {
+                    throw "错误: 没有密码"
+                } else if (value.match(/['"]/)) {
+                    throw "错误: 密码中不可有'或\"";
+                }
+                var escapedPass = value.replace('"', '\"').replace("'", "\\'");
+                startParts.push('-e', "PASSWORD='" + escapedPass + "'");
+            } else if (name === 'prohibit-lan') {
+                startParts.push('--cap-add=NET_ADMIN');
+            }
+        });
+
+        var startCommand = startParts.concat('jokester/shadowsocks-libev').join(' ');
+        $('#ss-start-command').text(startCommand);
+        $('#ss-stop-command').text('docker rm -f ' + container_name);
+        $('#error-message').text('');
+        $('#output').show();
+    } catch (e) {
+        console.error(e);
+        $('#error-message').text(e.toString());
+        $('#output').hide();
+        
+        return;
+    }
+};
+
+$('select').change(generate);
+$('input').keyup(generate);
+$('input').change(generate);
+$(generate);
+    </script>
+</body>
+
+</html>
