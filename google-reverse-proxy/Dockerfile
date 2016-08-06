@@ -36,7 +36,8 @@ RUN \
     && apk del $BUILD_DEP && rm -rf /var/cache/apk/*
 
 ADD nginx.conf /usr/local/nginx/conf/nginx.conf
+ADD default-cert /default-cert
 
-EXPOSE 20080
+EXPOSE 20080 20081
 
 CMD ["/usr/local/nginx/sbin/nginx", "-g", "daemon off;"]
