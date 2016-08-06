@@ -8,9 +8,9 @@
 
 ## Default configuration
 
-`docker run -d --publish 54321:20080 --restart=always jokester/google-reverse-proxy` starts a server with default configuration:
+`docker run -d --publish 54321:20081 --restart=always jokester/google-reverse-proxy` starts a server with default configuration:
 
-- Listen on `0.0.0.0:54321` (http)
+- The mirror site will be at `https://server-ip-address:54321`
 - Language: en
 - With google scholar (at `/scholar/`)
 

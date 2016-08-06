@@ -6,9 +6,9 @@
 
 ## 默认设置
 
-`docker run -d --publish 54321:20080 --restart=always jokester/google-reverse-proxy`
+`docker run -d --publish 54321:20081 --restart=always jokester/google-reverse-proxy`
 
-- 镜像站的http端口为`0.0.0.0:54321`
+- 镜像站的地址为`https://服务器IP:54321`
 - 语言=英文
 - 有google scholar (路径是`/scholar/`)
 
