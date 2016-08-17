@@ -19,6 +19,7 @@ RUN apk add --update wget openjdk8-jre-base && \
     rm -rf /var/cache/apk/*                      && \
     true
 
+COPY KeyBoxConfig.properties /opt/KeyBox-jetty/jetty/keybox/WEB-INF/classes/KeyBoxConfig.properties
 COPY run.sh /
 
 # default port, using https
