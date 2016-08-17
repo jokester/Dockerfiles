@@ -4,8 +4,8 @@ MAINTAINER Wang <momocraft@gmail.com>
 # Places you may want to mount a volume with:
 # /keydb
 
-ENV DOWNLOAD_URL https://github.com/skavanagh/KeyBox/releases/download/v2.85.03/keybox-jetty-v2.85_03.tar.gz
-ENV ARCHIVE keybox-jetty-v2.85_03.tar.gz
+ENV DOWNLOAD_URL https://github.com/skavanagh/KeyBox/releases/download/v2.86.00/keybox-jetty-v2.86_00.tar.gz
+ENV ARCHIVE keybox-jetty-v2.86_00.tar.gz
 
 RUN apk add --update wget openjdk8-jre-base && \
     mkdir -pv /opt /keydb                        && \
