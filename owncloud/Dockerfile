@@ -1,5 +1,5 @@
 #
-# A container for (http only) owncloud
+# A container for owncloud
 #
 
 FROM alpine:3.4
@@ -17,15 +17,18 @@ RUN \
     ln -svfn /data       /usr/share/webapps/owncloud/data   && \
     adduser nobody www-data
 
-ADD nginx.conf /etc/nginx/nginx.conf
-ADD php.ini    /etc/php5/php.ini
+ADD nginx.conf  /etc/nginx/nginx.conf
+ADD php.ini     /etc/php5/php.ini
+ADD nginx.d     /nginx.d
 ADD s6-services /s6-services
 
 # data volume. owner should be 65534:65534
 VOLUME /config
 # config volume. owner should be 65534:65534
 VOLUME /data
+# nginx configuration
+VOLUME /nginx.d
 
-EXPOSE 80
+EXPOSE 80 443
 
 CMD /bin/s6-svscan /s6-services
