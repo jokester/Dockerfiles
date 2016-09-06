@@ -2,6 +2,8 @@
 
 This image runs owncloud in alpine linux.
 
+[![](https://images.microbadger.com/badges/image/jokester/owncloud.svg)](http://microbadger.com/images/jokester/owncloud "Get your own image badge on microbadger.com")
+
 #### Quick start
 
 Default configuration: non-persistent data volume, serves at port 20080(http) and 443(self-signed https).
