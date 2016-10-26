@@ -10,6 +10,7 @@ ENV RUN_DEP s6 owncloud owncloud-sqlite nginx php5-fpm
 RUN \
     apk add --update $RUN_DEP                               && \
     mkdir -pv /run/nginx /config /data                      && \
+    chown 65534:65534 /config /data                         && \
     ln -sv   /dev/stdout /var/log/php-fpm.log               && \
     ln -sv   /dev/stdout /var/log/nginx/access.log          && \
     ln -sv   /dev/stderr /var/log/nginx/error.log           && \
@@ -22,12 +23,8 @@ ADD php.ini     /etc/php5/php.ini
 ADD nginx.d     /nginx.d
 ADD s6-services /s6-services
 
-# data volume. owner should be 65534:65534
-VOLUME /config
-# config volume. owner should be 65534:65534
-VOLUME /data
-# nginx configuration
-VOLUME /nginx.d
+# owner of /data and /config should be uid:gid = 65534:65534
+VOLUME ["/config", "/data", "/nginx.d"]
 
 EXPOSE 80 443
 
