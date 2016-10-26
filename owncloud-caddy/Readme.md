@@ -27,8 +27,8 @@ A full example with 2 data volumes:
 
 ```
 mkdir -pv /oc/data /oc/config
-chown 65534:65534 /owncloud-data /owncloud-conf
-docker run -d --restart=unless-stopped -p 80:80 -p 443:443 -v /oc-data:/data -v /oc/config:/config -e DOMAIN=my-domain.com jokester/owncloud-caddy
+chown 65534:65534 /oc/data /oc/config
+docker run -d --restart=unless-stopped -p 80:80 -p 443:443 -v /oc/data:/data -v /oc/config:/config -e DOMAIN=my-domain.com jokester/owncloud-caddy
 ```
 
 #### Configuration
@@ -40,4 +40,4 @@ docker run -d --restart=unless-stopped -p 80:80 -p 443:443 -v /oc-data:/data -v 
 
 #### Dockerfile
 
-[Dockerfile @ github](https://github.com/jokester/Dockerfiles/tree/master/owncloud-caddyfile)
+[Dockerfile @ github](https://github.com/jokester/Dockerfiles/tree/master/owncloud-caddy)
