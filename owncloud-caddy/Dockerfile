@@ -11,6 +11,7 @@ RUN \
 
 # overwrite nginx.conf: listen on 81 (http) only
 ADD nginx.conf        /etc/nginx/nginx.conf
-ADD Caddyfile         /etc/Caddyfile
 ADD s6-services/caddy /s6-services/caddy
 
+# will complain if this is not changed
+ENV DOMAIN example.com

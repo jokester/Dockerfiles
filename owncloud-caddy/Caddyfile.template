@@ -1,5 +1,6 @@
 # vim: ft=conf
-glados.jokester.info
+THE-DOMAIN-NAME-GOES-HERE
+# glados.jokester.info
 
 log stdout
 errors stdout

@@ -1,3 +1,36 @@
 #!/bin/sh
-# exec caddy_linux_amd64 -ca "https://acme-staging.api.letsencrypt.org/directory" -email "noemail@example.com" -conf /etc/Caddyfile -agree
-exec caddy -ca "https://acme-staging.api.letsencrypt.org/directory" -email "noemail@example.com" -conf /etc/Caddyfile -agree
+if [[ "$DOMAIN" = "example.com" ]]; then
+  echo '$DOMAIN not set. Quitting'
+  echo '$DOMAIN should be set with `docker run -e "DOMAIN=my.domain.net`'
+  echo 'If a domain is not required, use https://hub.docker.com/r/jokester/owncloud/ instead'
+  kill -9 -1
+  exit 1
+fi
+
+cat >/etc/Caddyfile <<END
+$DOMAIN
+
+log stdout
+errors stdout
+
+gzip
+
+internal /config
+internal /data
+
+proxy / 127.0.0.1:81 {
+	proxy_header Host {host}
+	proxy_header X-Real-IP {remote}
+	proxy_header X-Forwarded-Proto {scheme}
+	except /config
+	except /data
+}
+END
+
+# for test
+LE_CA="https://acme-staging.api.letsencrypt.org/directory"
+
+# LE production
+LE_CA="https://acme-v01.api.letsencrypt.org/directory"
+
+exec caddy -ca $LE_CA -email "noemail@example.com" -conf /etc/Caddyfile -agree
