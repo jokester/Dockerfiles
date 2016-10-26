@@ -9,6 +9,7 @@ ENV RUN_DEP s6 owncloud owncloud-sqlite nginx php5-fpm
 
 RUN \
     apk add --update $RUN_DEP                               && \
+    rm -rf /var/cache/apk/*                                 && \
     mkdir -pv /run/nginx /config /data                      && \
     chown 65534:65534 /config /data                         && \
     ln -sv   /dev/stdout /var/log/php-fpm.log               && \

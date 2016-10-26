@@ -1,0 +1,19 @@
+# vim: ft=conf
+THE-DOMAIN-NAME-GOES-HERE
+# glados.jokester.info
+
+log stdout
+errors stdout
+
+gzip
+
+internal /config
+internal /data
+
+proxy / 127.0.0.1:81 {
+	proxy_header Host {host}
+	proxy_header X-Real-IP {remote}
+	proxy_header X-Forwarded-Proto {scheme}
+	except /config
+	except /data
+}

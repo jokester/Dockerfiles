@@ -1,12 +1,16 @@
 # Owncloud
 
-This image runs owncloud in alpine linux.
+Runs owncloud in alpine linux.
 
 [![](https://images.microbadger.com/badges/image/jokester/owncloud.svg)](http://microbadger.com/images/jokester/owncloud "Get your own image badge on microbadger.com")
 
+#### Note
+
+This image has a [enhanced version](https://hub.docker.com/r/jokester/owncloud-caddy/) that automagically apply HTTPS certs from Let's Encrypt.
+
 #### Quick start
 
-Default configuration: non-persistent data volume, serves at port 20080(http) and 443(self-signed https).
+Default configuration: non-persistent data volume, serves at port 20080 (plain http) and 20443 (self-signed https).
 
     docker run -d --restart=always -p 20080:80 -p 20443:443 jokester/owncloud
 
