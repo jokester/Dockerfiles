@@ -2,7 +2,7 @@
 
 Runs owncloud 9 in alpine linux, with auto-issued `Let's Encrypt` https certificate.
 
-<!-- TODO badge here -->
+[![](https://images.microbadger.com/badges/image/jokester/owncloud-caddy.svg)](https://microbadger.com/images/jokester/owncloud-caddy "Get your own image badge on microbadger.com")
 
 #### Note
 
