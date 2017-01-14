@@ -26,7 +26,7 @@ RUN true                                                                        
         --add-module=../$PKGNAME_MOD1                                                               \
         --with-http_ssl_module                                                                      \
         --with-ipv6                                                                                 \
-    && make -j install                                                                              \
+    && make install                                                                                 \
     && rm -rf /usr/src                                                                              \
     && apk del BUILD_DEP                                                                            \
     && rm -rf /var/cache/apk/*
