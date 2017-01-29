@@ -31,23 +31,37 @@ Related: see [this image](#) for a [ELK]() server that pulls log from S3
 
 NOTE: be sure to bind ports to `127.0.0.1` to kept them from internet.
 
+#### docker
+
 ```bash
 # docker run -d -p 127.0.0.1:24224:24224 jokester:fluentd-archiver
 ```
 
+#### docker-compose
+
+docker-compose (warning: log may lost without synchronization/wait of containers)
+
 ```yaml
-TODO
+version: '2'
+services:
+  fluentd-archiver:
+    image: jokester/fluentd-archiver
+    ports:
+      - "127.0.0.1:24224:24224"
+    volumes:
+      - "./log-archive:/log-archive"
+    restart: always
 ```
 
 ## Let containers logs to fluentd-archiver
 
-### docker
+#### docker
 
 ```bash
 TODO
 ```
 
-### docker-compose
+#### docker-compose
 
 ```yaml
 version: '2'
@@ -57,7 +71,7 @@ services:
       driver: fluentd
       options:
         fluentd-address: "127.0.0.1:24224"
-        # this option REQUIRES docker 1.11
+        # async-connect requires docker >= 1.11
         fluentd-async-connect: "true"
 ```
 
