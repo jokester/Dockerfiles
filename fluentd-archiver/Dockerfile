@@ -16,6 +16,7 @@ RUN true                                         \
         && fluent-gem install --no-ri --no-rdoc  \
             fluent-plugin-s3                     \
         && apk del BUILD_DEP                     \
+        && mkdir /log-archive                    \
         && rm -rf /var/cache/apk/*
 
 COPY fluentd /fluentd
