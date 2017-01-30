@@ -24,7 +24,7 @@ crl_signing_key
 
 # initialize a self-signed CA
 init-ca () {
-  if false && [[ -r $CA_CERT ]]; then
+  if [[ -r $CA_CERT ]]; then
     echo CA already initialized
   else
     echo Initializing CA
@@ -40,9 +40,7 @@ init-ca () {
 }
 
 init-server-id () {
-  local
-
-
+  local SERVER_ROOT=$CA
 }
 
 init-ca

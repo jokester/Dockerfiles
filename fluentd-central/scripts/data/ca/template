@@ -1,0 +1,8 @@
+
+expiration_days=36524
+cn=Log-central
+uri=https://github.com/jokester/Dockerfiles
+ca
+cert_signing_key
+crl_signing_key
+
