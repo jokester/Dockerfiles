@@ -2,14 +2,14 @@
 # A container for empty nginx instance
 #
 
-FROM alpine:3.4
+FROM alpine:3.5
 MAINTAINER Wang <momocraft@gmail.com>
 
 RUN \
-    apk add --update nginx                                  && \
-    mkdir -pv /run/nginx  /sites.d                          && \
-    ln -sv   /dev/stdout /var/log/nginx/access.log          && \
-    ln -sv   /dev/stderr /var/log/nginx/error.log           && \
+    apk add --update nginx                       && \
+    mkdir -pv /run/nginx  /sites.d               && \
+    ln -sv /dev/stdout /var/log/nginx/access.log && \
+    ln -sv /dev/stderr /var/log/nginx/error.log  && \
     rm -rf /var/cache/apk/*
 
 ADD nginx.conf /etc/nginx/nginx.conf
