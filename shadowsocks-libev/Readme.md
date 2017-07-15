@@ -1,5 +1,7 @@
 ## Shadowsocks-libev @ alpine linux
 
+DEPRECATED in favor of up-to date [easypi/shadowsocks-libev](https://hub.docker.com/r/easypi/shadowsocks-libev/) image.
+
 ----------------
 
 Run with default configuration:
