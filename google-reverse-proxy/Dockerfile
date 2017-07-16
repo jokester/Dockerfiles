@@ -8,11 +8,11 @@
 FROM alpine:3.6
 MAINTAINER Wang <momocraft@gmail.com>
 
-ENV BUILD_DEP build-base wget tar openssl-dev pcre-dev zlib-dev
-ENV RUN_DEP openssl pcre zlib
-ENV PKGNAME_NGINX nginx-1.12.1
-ENV PKGNAME_MOD1 ngx_http_google_filter_module-0.2.0
-ENV PKGNAME_MOD2 ngx_http_substitutions_filter_module-0.6.4
+ARG BUILD_DEP="build-base wget tar openssl-dev pcre-dev zlib-dev"
+ARG RUN_DEP="openssl pcre zlib"
+ARG PKGNAME_NGINX=nginx-1.12.1
+ARG PKGNAME_MOD1=ngx_http_google_filter_module-0.2.0
+ARG PKGNAME_MOD2=ngx_http_substitutions_filter_module-0.6.4
 
 RUN \
     apk add --update $BUILD_DEP $RUN_DEP                                                                                                  \
