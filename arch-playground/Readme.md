@@ -58,7 +58,7 @@ passwd: password updated successfully
 
 ```
 $ ssh newuser@localhost -p 60022
-(if you are prompted the host key, type `yes`)
+(if you are prompted with the new host key, type `yes`)
 newuser@localhost's password:
 [newuser@arch-p1 ~]$
 ```

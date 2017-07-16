@@ -1,5 +1,5 @@
 #
-# Dockerfile for ngx_http_google_filter_module, an nginx module that mirrors google.
+# Dockerfile for ngx_http_google_filter_module, an nginx module for google (search) mirror.
 #
 # ref:
 # [ngx_http_google_filter_module](https://github.com/cuber/ngx_http_google_filter_module)

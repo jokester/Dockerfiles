@@ -1,0 +1,19 @@
+version: '2'
+
+#
+# log_fluentd: &log_fluentd
+#   driver: fluentd
+#   options:
+#     fluentd-address: '127.0.0.1:24224'
+#     fluentd-async-connect: true
+
+services:
+  fluentd-archiver:
+    image: jokester/fluentd-archiver
+    ports:
+      - "127.0.0.1:24224:24224"
+    volumes:
+      - "./log-archive:/log-archive"
+    restart: always
+
+# vim: sw=2

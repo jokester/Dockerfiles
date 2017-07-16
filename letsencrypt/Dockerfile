@@ -4,8 +4,8 @@
 FROM alpine:3.4
 MAINTAINER Wang <momocraft@gmail.com>
 
-ENV BUILD_DEP tar git
-ENV RUN_DEP openssl py-pip bash curl
+ONBUILD ENV BUILD_DEP tar git
+ONBUILD ENV RUN_DEP openssl py-pip bash curl
 ENV LE_PATH /letsencrypt.sh-0.2.0
 
 COPY data-seed /data-seed
