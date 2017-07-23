@@ -7,7 +7,7 @@ A [fluentd](http://www.fluentd.org/) container to receive logs from local (host/
 We have the following drivers / formats by default. Port forwarding like `127.0.0.1(host):PORT -> container:PORT` is required.
 
 - fluentd format
-    - Used by [docker fluentd driver](https://docs.docker.com/engine/admin/logging/fluentd/). See [](#) for
+    - Used by [docker fluentd driver](https://docs.docker.com/engine/admin/logging/fluentd/).
 
 <!-- TODO more input, maybe on different port, for fluentd -->
 
@@ -34,7 +34,7 @@ NOTE: be sure to bind ports to `127.0.0.1` to kept them from internet.
 #### docker
 
 ```bash
-# docker run -d -p 127.0.0.1:24224:24224 jokester:fluentd-archiver
+# docker run -d -p 127.0.0.1:24224:24224 jokester/fluentd-archiver
 ```
 
 #### docker-compose

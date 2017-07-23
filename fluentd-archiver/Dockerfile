@@ -2,7 +2,7 @@
 #
 #   A [fluentd](http://www.fluentd.org/) instance to receive logs and archive them.
 
-FROM alpine:3.5
+FROM alpine:3.6
 MAINTAINER Wang <momocraft@gmail.com>
 
 RUN true                                         \
