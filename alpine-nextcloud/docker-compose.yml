@@ -1,19 +1,45 @@
 version: '2'
 
-#
-# log_fluentd: &log_fluentd
-#   driver: fluentd
-#   options:
-#     fluentd-address: '127.0.0.1:24224'
-#     fluentd-async-connect: true
+volumes:
+  nextcloud-app:
+  nextcloud-custom-apps:
+  nextcloud-config:
+  nextcloud-data:
+  nextcloud-db:
 
 services:
-  fluentd-archiver:
-    image: jokester/fluentd-archiver
-    ports:
-      - "127.0.0.1:24224:24224"
+  nextcloud-app:
+    image: nextcloud:12-fpm
+    links:
+      - nextcloud-db
     volumes:
-      - "./log-archive:/log-archive"
+      - nextcloud-app:/var/www/html
+      - nextcloud-custom-apps:/var/www/html/custom_apps
+      - nextcloud-config:/var/www/html/config
+      - nextcloud-data:/var/www/html/data
     restart: always
 
-# vim: sw=2
+  nextcloud-db:
+    image: postgres:10-alpine
+    restart: always
+    volumes:
+      - nextcloud-db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=SUPER_STRONG_PASSWORD
+      - POSTGRES_USER=nc
+
+  nginx-front:
+    image: alpine:3.6
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+    restart: always
+    command: |
+      sh -c "apk add --update nginx ; mkdir -pv /run/nginx && ln -svf /dev/stdout /var/log/nginx/access.log && ln -svf /dev/stderr /var/log/nginx/error.log && exec nginx "
+    volumes:
+      - "./nginx.conf:/etc/nginx/nginx.conf:ro"
+      - "./nginx-conf.d:/etc/nginx/conf.d:ro"
+      - nextcloud-app:/var/www/html:ro
+    links:
+      - nextcloud-app
