@@ -5,9 +5,8 @@ This repo contains `Dockerfile`s, and other Docker-related settings I use.
 - [arch-playground](arch-playground) a ssh-only archlinux image
 - [fluentd-archiver](fluentd-archiver) a Fluentd instance to collect and forward docker logs
 - [google-reverse-proxy](google-reverse-proxy) a `nginx` image to mirror Google search and Google scholar
-- [letsencrypt](letsencrypt) a one-shot container to apply Let's Encrypt certificates, with DNS challenge
 - [owncloud-caddy](owncloud-caddy) a owncloud 9 instance, with auto-issued Let's Encrypt certs
-    - Requires a dedicated global IP address for https and http challange.
+    - Requires a dedicated global IP address for http challange.
 
 ## Services
 
@@ -40,6 +39,8 @@ If you need one of them revived and updated, feel free to create a issue.
     - not working: Oracle JRE does not support alpine
 - [fluentd-central](obsolete/fluentd-central)
     - not working: may revive it when I found a better solution
+- [letsencrypt](letsencrypt) a one-shot container to apply Let's Encrypt certificates, with DNS challenge
+    - not updating and using it myself. please consider [adferrand/letsencrypt-dns](https://hub.docker.com/r/adferrand/letsencrypt-dns/) instead.
 
 ### License
 
