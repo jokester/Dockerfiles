@@ -5,7 +5,7 @@ volumes:
   nextcloud-custom-apps:
   nextcloud-config:
   nextcloud-data:
-  nextcloud-db:
+  nextcloud-pgsql:
 
 services:
   nextcloud-app:
@@ -23,9 +23,9 @@ services:
     image: postgres:10-alpine
     restart: always
     volumes:
-      - nextcloud-db:/var/lib/postgresql/data
+      - nextcloud-pgsql:/var/lib/postgresql/data
     environment:
-      - POSTGRES_PASSWORD=SUPER_STRONG_PASSWORD
+      - POSTGRES_PASSWORD=SUPER_STRONG_PASSWORD # TODO: change me
       - POSTGRES_USER=nc
 
   nginx-front:
