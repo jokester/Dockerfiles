@@ -12,7 +12,15 @@ This repo contains `Dockerfile`s, and other Docker-related settings I use.
 
 A *service* contains multiple container definitions, connected with `docker-compose`.
 
-- [alpine-nextcloud](alpine-nextcloud) NextCloud 12 instance (nginx / php-fpm / PgSQL) with alpine linux 3.6
+- [alpine-nextcloud](alpine-nextcloud) NextCloud 12 instance (nginx / php-fpm / PgSQL)
+- [alpine-piwik](alpine-piwik) Piwik 3.2.0 instance (nginx / php-fpm / MariaDB)
+
+<!-- TODO: conventions
+All service-s uses a container. It is possible to  (docker-compose merges them to 1)
+- a `nginx-front` container to expose http/https to public
+-->
+
+<!-- TODO: elk stack -->
 
 ## Kubernetes Pods
 

@@ -1,0 +1,22 @@
+version: '2'
+
+services:
+  fluentd-archiver:
+    image: jokester/fluentd-debian-plugins
+    volumes:
+      - ./fluentd.conf:/fluentd/etc/fluent.conf:ro
+      - ./fluentd-log:/fluentd/log:rw
+      - ./pki:/pki:ro
+    restart: always
+
+  fluent-bit-agent:
+    image: fluent/fluent-bit:0.12
+    volumes:
+      - ./fluent-bit.conf:/fluent-bit/etc/fluent-bit.conf:ro
+      - ./pki/fluent-demo.pem:/pki/fluent-demo.pem:ro
+    environment:
+      - HOSTNAME=fluent-bit-host
+    links:
+      # in practice fluentd-archiver will be running on a different pc
+      - fluentd-archiver
+    restart: always
