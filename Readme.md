@@ -12,7 +12,7 @@ This repo contains `Dockerfile`s, and other Docker-related settings I use.
 
 A *service* contains multiple container definitions, connected with `docker-compose`.
 
-- (under construction) [alpine-nextcloud](alpine-nextcloud) NextCloud 12 instance
+- [alpine-nextcloud](alpine-nextcloud) NextCloud 12 instance (nginx / php-fpm / PgSQL) with alpine linux 3.6
 
 ## Kubernetes Pods
 
