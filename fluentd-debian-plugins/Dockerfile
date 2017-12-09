@@ -4,7 +4,7 @@
 #   based on [Fluentd Docker Image](https://github.com/fluent/fluentd-docker-image)
 #   
 
-FROM fluent/fluentd:v0.14-debian-onbuild
+FROM fluent/fluentd:v1.0-debian-onbuild
 MAINTAINER Wang <momocraft@gmail.com>
 
 RUN true \
@@ -13,10 +13,10 @@ RUN true \
         && apt-get install -y --no-install-recommends $BUILD_DEPS             \
         && gem install --no-ri --no-rdoc                                      \
             fluent-plugin-elasticsearch:2.4.0                                 \
+            fluent-plugin-influxdb:1.0.0                                      \
+            fluent-plugin-rewrite:0.1.1                                       \
             fluent-plugin-s3:1.1.0                                            \
             fluent-plugin-systemd:0.3.1                                       \
-            fluent-plugin-rewrite:0.1.1                                       \
-            fluent-plugin-influxdb:1.0.0.rc3                                  \
         && apt-get purge -y --auto-remove \
                   -o APT::AutoRemove::RecommendsImportant=false \
                   $BUILD_DEPS \

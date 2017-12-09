@@ -1,6 +1,6 @@
 # fluentd-full
 
-fluentd with additional plugins. Based on [fluent/fluentd:v0.14-debian-onbuild](https://github.com/fluent/fluentd-docker-image)
+fluentd v1.0 with additional plugins. Based on [fluent/fluentd:v1.0-debian-onbuild](https://github.com/fluent/fluentd-docker-image)
 
 ## Config
 
