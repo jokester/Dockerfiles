@@ -2,14 +2,14 @@
 # Dockerfile for shadowsocks-libev
 #
 
-FROM alpine:3.5
+FROM alpine:3.8
 MAINTAINER Wang <momocraft@gmail.com>
 
-ENV SS_VER    2.6.1
-ENV SS_URL    https://github.com/shadowsocks/shadowsocks-libev/archive/v$SS_VER.tar.gz
+ENV SS_VER    3.2.0
+ENV SS_URL    https://github.com/shadowsocks/shadowsocks-libev/releases/download/v$SS_VER/shadowsocks-libev-$SS_VER.tar.gz
 ENV SS_DIR    shadowsocks-libev-$SS_VER
-ENV RUN_DEP   openssl pcre
-ENV BUILD_DEP autoconf build-base curl libtool linux-headers openssl-dev file pcre-dev
+ENV RUN_DEP   pcre libsodium mbedtls c-ares libev
+ENV BUILD_DEP autoconf automake build-base curl libtool linux-headers file pcre-dev libsodium-dev mbedtls-dev c-ares-dev libev-dev
 
 RUN set -ex \
     && apk add --update $BUILD_DEP $RUN_DEP \
