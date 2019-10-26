@@ -33,12 +33,33 @@ services:
     - K3S_CLUSTER_SECRET=somethingtotallyrandom
     - K3S_NODE_NAME=node1
 
-  node8:
+  node2:
     <<: *node-template
     environment:
     - K3S_URL=https://server:6443
     - K3S_CLUSTER_SECRET=somethingtotallyrandom
-    - K3S_NODE_NAME=node8
+    - K3S_NODE_NAME=node2
+
+  node3:
+    <<: *node-template
+    environment:
+    - K3S_URL=https://server:6443
+    - K3S_CLUSTER_SECRET=somethingtotallyrandom
+    - K3S_NODE_NAME=node3
+
+  node4:
+    <<: *node-template
+    environment:
+    - K3S_URL=https://server:6443
+    - K3S_CLUSTER_SECRET=somethingtotallyrandom
+    - K3S_NODE_NAME=node4
+
+  node5:
+    <<: *node-template
+    environment:
+    - K3S_URL=https://server:6443
+    - K3S_CLUSTER_SECRET=somethingtotallyrandom
+    - K3S_NODE_NAME=node5
 
 volumes:
   k3s-server: {}
