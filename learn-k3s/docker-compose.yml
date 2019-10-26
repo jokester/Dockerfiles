@@ -1,4 +1,16 @@
-version: '3'
+version: '3.7'
+
+x-node-template: &node-template
+  image: rancher/k3s:v0.10.0
+  tmpfs:
+  - /run
+  - /var/run
+  privileged: true
+  environment:
+  - K3S_URL=https://server:6443
+  - K3S_CLUSTER_SECRET=somethingtotallyrandom
+  - K3S_NODE_NAME=node1
+
 services:
   server:
     image: rancher/k3s:v0.10.0
@@ -14,17 +26,19 @@ services:
     ports:
     - 6443:6443
 
-  node:
-    image: rancher/k3s:v0.10.0
-    tmpfs:
-    - /run
-    - /var/run
-    privileged: true
+  node1:
+    <<: *node-template
     environment:
     - K3S_URL=https://server:6443
     - K3S_CLUSTER_SECRET=somethingtotallyrandom
-    # Can also use K3S_TOKEN from /var/lib/rancher/k3s/server/node-token instead of K3S_CLUSTER_SECRET
-    #- K3S_TOKEN=K13849a67fc385fd3c0fa6133a8649d9e717b0258b3b09c87ffc33dae362c12d8c0::node:2e373dca319a0525745fd8b3d8120d9c
+    - K3S_NODE_NAME=node1
+
+  node8:
+    <<: *node-template
+    environment:
+    - K3S_URL=https://server:6443
+    - K3S_CLUSTER_SECRET=somethingtotallyrandom
+    - K3S_NODE_NAME=node8
 
 volumes:
   k3s-server: {}
