@@ -1,7 +1,7 @@
 version: '3.7'
 
 x-node-template: &node-template
-  image: rancher/k3s:v0.10.0
+  image: rancher/k3s:v0.10.2
   tmpfs:
   - /run
   - /var/run
@@ -13,7 +13,7 @@ x-node-template: &node-template
 
 services:
   server:
-    image: rancher/k3s:v0.10.0
+    image: rancher/k3s:v0.10.2
     command: server --disable-agent
     environment:
     - K3S_CLUSTER_SECRET=somethingtotallyrandom

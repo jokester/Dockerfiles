@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+SCRIPT_DIR=$(dirname "$0")
+set -x
+exec "$HOME/local/opt/k3s/k3s-v0.10.2" kubectl --kubeconfig="$SCRIPT_DIR/kubeconfig.yaml" "$@"
