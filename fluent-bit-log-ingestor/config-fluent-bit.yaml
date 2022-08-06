@@ -1,0 +1,24 @@
+kind: ConfigMap
+metadata:
+  name: config-fluent-bit
+apiVersion: v1
+data:
+  fluent-bit.conf: |-
+    [SERVICE]
+        Flush          1
+        Daemon         Off
+
+    [INPUT] # see https://docs.fluentbit.io/manual/pipeline/inputs/tail
+        Name           tail
+        Tag            *
+        Path           /var/log/containers/*.log
+        Parser         docker
+        Mem_Buf_Limit  5MB
+
+    [OUTPUT] # see https://docs.fluentbit.io/manual/pipeline/outputs/forward
+        Name            forward
+        Match           *
+        # IP address of another fluentd/fluent-bit with "forward" input plugin
+        # TODO: change to yours
+        Host            192.168.3.99
+        Compress        gzip

@@ -9,9 +9,9 @@ This repo contains `Dockerfile`s, and other Docker-related settings I use.
 - [fluentd-debian-plugins](fluentd-debian-plugins)
     - [fluent/fluentd](https://hub.docker.com/r/fluent/fluentd/) enhanced with plugins
 
-## K8s kustomization files
+## K8s kustomization modules
 
-- [fluent-bit-log-collector]() collect local from nodes, and forwards to other log sink.
+- [fluent-bit-log-ingestor](fluent-bit-log-ingestor) `DaemonSet` to tail local log files in nodes, and forwards to a log sink.
 
 ## Services
 

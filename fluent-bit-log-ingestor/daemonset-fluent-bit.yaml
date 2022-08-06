@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: fluent-bit
+spec:
+  selector:
+    matchLabels:
+      app: fluent-bit
+  template:
+    metadata:
+      labels:
+        app: fluent-bit
+    spec:
+      containers:
+      - name: fluent-bit
+        image: fluent/fluent-bit:1.9
+        env: []
+        command:
+          - /fluent-bit/bin/fluent-bit
+          - -c
+          - /fluent-bit/etc/fluent-bit.conf
+        resources:
+          limits:
+            memory: 100Mi
+          requests:
+            cpu: 100m
+            memory: 100Mi
+        volumeMounts:
+        - name: config
+          mountPath: /fluent-bit/etc
+          readOnly: true
+        - name: var-log
+          mountPath: /var/log
+          readOnly: true
+        - name: var-lib-docker-containers
+          mountPath: /var/lib/docker/containers
+          readOnly: true
+      terminationGracePeriodSeconds: 10
+      volumes:
+      - name: config
+        configMap:
+          name: config-fluent-bit
+      - name: var-log
+        hostPath:
+          path: /var/log
+      - name: var-lib-docker-containers
+        hostPath:
+          path: /var/lib/docker/containers
