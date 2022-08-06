@@ -9,6 +9,10 @@ This repo contains `Dockerfile`s, and other Docker-related settings I use.
 - [fluentd-debian-plugins](fluentd-debian-plugins)
     - [fluent/fluentd](https://hub.docker.com/r/fluent/fluentd/) enhanced with plugins
 
+## K8s kustomization files
+
+- [fluent-bit-log-collector]() collect local from nodes, and forwards to other log sink.
+
 ## Services
 
 A *service* contains multiple container definitions, connected with `docker-compose`.
@@ -16,7 +20,6 @@ A *service* contains multiple container definitions, connected with `docker-comp
 - [alpine-nextcloud](alpine-nextcloud) NextCloud 12 instance (nginx / php-fpm / PgSQL)
 - [alpine-piwik](alpine-piwik) Piwik 3.2.0 instance (nginx / php-fpm / MariaDB)
 - [alpine-piwik](alpine-piwik) Piwik 3.2.0 instance (nginx / php-fpm / MariaDB)
-- [fluent-agents-example](fluentd-agents-example) example of collecting logs with lightweight `fluent-bit`, and forward to a central `fluentd` instance
 
 <!-- TODO: conventions
 All service-s uses a container. It is possible to  (docker-compose merges them to 1)
@@ -33,28 +36,28 @@ All service-s uses a container. It is possible to  (docker-compose merges them t
 
 ## Obsolete images
 
-Some of them may still work, but not used (by me) or updated.
-If you need one of them revived and updated, feel free to create a issue.
+Some of them may still work, but I don't plan to use or update them.
 
 - [owncloud](obsolete/owncloud)
     - planning to switch to multi-container solution, for less build work
 - [shadowsocks-libev](obsolete/shadowsocks-libev) shadowsocks-libev built in alpine
     - deprecated in favor of up-to date [easypi/shadowsocks-libev](https://hub.docker.com/r/easypi/shadowsocks-libev/) image.
 - [jfrog-artifactory-oss](obsolete/jfrog-artifactory-oss) artifactory-oss running in alpine linux and OpenJRE
-    - not used: moved my package repo to cloud service
+    - not used: moved my private repo to cloud service
 - [nginx-rtmp](obsolete/nginx-rtmp)
     - not required: nginx package from alpine repo already have `nginx-rtmp` module compiled.
 - [openvpn](obsolete/openvpn) / [nginx-front](obsolete/nginx-front)
     - not required as a separated image: a `docker run` command would be easier
+- [letsencrypt](letsencrypt) a one-shot container to apply Let's Encrypt certificates, with DNS challenge
+    - just use `acme.sh`
 - [oracle-jre](obsolete/oracle-jre)
-    - not working: Oracle JRE does not support alpine
+    - just use OpenJDK or Amazon Corretto
 - [fluentd-central](obsolete/fluentd-central)
     - not working: may revive it when I found a better solution
-- [fluentd-archiver](fluentd-archiver) a Fluentd instance to collect and forward docker logs
-    - deprecated in favor of fluentd-debian-plugins, for new versions and systemd support
-- [letsencrypt](letsencrypt) a one-shot container to apply Let's Encrypt certificates, with DNS challenge
-    - not updating and using it myself. please consider [adferrand/letsencrypt-dns](https://hub.docker.com/r/adferrand/letsencrypt-dns/) instead.
+- [fluentd-archiver](obsolete/fluentd-archiver) a Fluentd instance to collect and forward docker logs
+    - just use `fluentd` or `fluent-bit` with a config file in volume
+- [fluent-agents-example](fluentd-agents-example) example of collecting logs with lightweight `fluent-bit`, and forward to a central `fluentd` instance
 
-### License
+## License
 
 MIT.
